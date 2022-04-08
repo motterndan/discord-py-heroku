@@ -24,4 +24,4 @@ async def on_message(message):
     if message.content == 'teeth?':
         await message.channel.send(response)
         
-        
+    client.run(TOKEN)
