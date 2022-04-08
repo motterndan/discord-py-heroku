@@ -24,5 +24,4 @@ async def on_message(message):
     if message.content == 'teeth?':
         await message.channel.send(response)
         
-client.run("OTYxNzkwODE2OTI0MzU2NjE4.Yk-Hfw.HHVw6tSHxmwYnEfLAv4b3EHtF1w")
         
