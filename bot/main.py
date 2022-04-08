@@ -1,16 +1,28 @@
+# bot.py
 import os
-from discord.ext import commands
 
-bot = commands.Bot(command_prefix="!")
-TOKEN = os.getenv("DISCORD_TOKEN")
+import discord
 
-@bot.event
-async def on_ready():
-    print(f"Logged in as {bot.user.name}({bot.user.id})")
+from dotenv import load_dotenv
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send("pong")
+client = discord.Client()
 
-if __name__ == "__main__":
-    bot.run(TOKEN)
+@client.event
+async def on_message(message):
+    tooth_price = 0.25
+    primogem_cost_low = 0.015
+    primogem_cost_high = 0.0165
+    low_cost = str(round(tooth_price/primogem_cost_low,2))
+    high_cost = str(round(tooth_price/primogem_cost_high,2))
+    response = 'Assuming the going rate of '+ str(tooth_price) +\
+        ' dollars per tooth, and the cost of a primogem ranges from '\
+            + str(primogem_cost_low) + ' to ' + str(primogem_cost_high) + \
+                ' dollars, we can calculate that one tooth is worth '\
+                    + high_cost + ' to ' + low_cost + ' primogems'
+    if message.content == 'teeth?':
+        await message.channel.send(response)
+        
+client.run("OTYxNzkwODE2OTI0MzU2NjE4.Yk-Hfw.HHVw6tSHxmwYnEfLAv4b3EHtF1w")
+        
